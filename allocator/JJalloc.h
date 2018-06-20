@@ -3,7 +3,7 @@
 
 #include <new>
 #include <cstddef>
-#include <cstdio>
+#include <cstdlib>
 #include <climits>
 #include <iostream>
 
@@ -12,11 +12,11 @@ namespace JJ
 template <class T>
 inline T* _allocate(ptrdiff_t size,T*)
 {
-	set_new_handler(0);
-	T* tmp = (T*)(::operator mew((size_t)(size *sizeof(T))));
+	std::set_new_handler(0);
+	T* tmp = (T*)(::operator new((size_t)(size *sizeof(T))));
 	if(tmp==0)
 	{
-		cerr << "out of memory"<<endl;
+		std::cerr << "out of memory"<< std::endl;
 		exit(1);
 	}
 	return tmp;
@@ -70,7 +70,7 @@ class allocator
 		}
 		size_type max_size() const
 		{
-			return size_type(UINT_MAX/sizeof(T);
+			return size_type(UINT_MAX/sizeof(T));
 		}
 		};
 }
